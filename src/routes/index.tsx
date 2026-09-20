@@ -76,10 +76,7 @@ function Index() {
     }
   };
 
-  const tweetText = encodeURIComponent(
-    `I scored ${score}/${TOTAL_QUESTIONS} on the Maze of Gains quiz — rank: ${rank.title}. Beat that!`,
-  );
-  const tweetUrl = `https://twitter.com/intent/tweet?text=${tweetText}`;
+  const tweetHref = tweetUrl(score, rank.title);
 
   const question = questions[current];
   const selected = answers[current];
