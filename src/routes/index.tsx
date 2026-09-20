@@ -217,35 +217,44 @@ function Index() {
         )}
 
         {phase === "done" && (
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rise rounded-[24px] border-4 border-black bg-card p-6 shadow-[0_8px_0_#000] sm:p-8">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                Final score
-              </span>
-              <div className="mt-2 font-display text-5xl text-gold sm:text-6xl">
-                {score}
-                <span className="text-3xl text-foreground/30">/15</span>
-              </div>
-              <span className="blink mt-2 block font-mono text-[10px] uppercase tracking-[0.2em] text-correct">
-                Loot secured
-              </span>
+          <div className="grid gap-5">
+            <div className="rise">
+              <img
+                src={cardPath(score)}
+                alt={`Score card: ${score} out of ${TOTAL_QUESTIONS}, rank ${rank.title}`}
+                width={1200}
+                height={630}
+                className="w-full rounded-[24px] border-4 border-black shadow-[0_10px_0_#000]"
+              />
             </div>
-            <div className="rise flex flex-col justify-center rounded-[24px] border-4 border-black bg-magenta p-6 shadow-[0_8px_0_#000] sm:p-8">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-dungeon/60">Rank</span>
-              <span className="mt-1 font-display text-2xl leading-tight tracking-tight text-dungeon sm:text-3xl">
-                {rank.title}
-              </span>
-              <span className="mt-2 text-[11px] text-dungeon/70">{rank.blurb}</span>
-            </div>
-            <div className="rise flex justify-center sm:col-span-2">
+
+            <div className="rise flex flex-col items-center gap-3">
               <a
-                href={tweetUrl}
+                href={tweetHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-2xl border-2 border-black bg-cyan px-10 py-5 font-display text-xl text-dungeon shadow-[0_8px_0_#000] transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-0 active:shadow-[0_3px_0_#000]"
               >
                 Post on X 𝕏
               </a>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                Card + {X_HANDLE} tagged in the post
+              </span>
+              <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
+                <a
+                  href={cardPath(score)}
+                  download={`maze-of-gains-${score}-of-${TOTAL_QUESTIONS}.png`}
+                  className="rounded-xl border-2 border-black bg-gold px-5 py-3 font-display text-sm text-dungeon"
+                >
+                  Save card
+                </a>
+                <button
+                  onClick={startQuiz}
+                  className="rounded-xl border-2 border-black bg-volt px-5 py-3 font-display text-sm text-dungeon"
+                >
+                  Run it again
+                </button>
+              </div>
             </div>
           </div>
         )}
